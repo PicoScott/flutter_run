@@ -11,7 +11,7 @@ void main() => runApp(MaterialApp(
         switch (settings.name) {
           case '/':
             return MaterialPageRoute(builder: (context) => MainPage());
-          case '/widget/text':
+          case '/widget_common':
             return MaterialPageRoute(
                 builder: (context) =>
                     WigetDisplayPage(settings.arguments as RouterData));
@@ -35,11 +35,6 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

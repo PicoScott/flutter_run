@@ -1,33 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_run/app/widget/animation/hero_animation_run.dart';
+import 'package:flutter_run/app/widget/animation/route_animation_run.dart';
+import 'package:flutter_run/app/widget/animation/simple_animation_run.dart';
 
-class RouterData {
-  final int index;
-  String title;
-  String description;
-  String routerName;
-  IconData icon;
-  bool selected;
-  List<RouterData> expandData;
-  RouterData(
-      {this.index,
-      this.title,
-      this.description,
-      this.routerName,
-      this.icon,
-      this.selected = false,
-      this.expandData});
+typedef PreviewWidgetFactory = Widget Function();
+typedef IntroduceWidgetFactory = Widget Function();
+
+class RouterGroup {
+  final String title;
+  final String description;
+  final IconData icon;
+  final List<RouterData> expandData;
+  RouterGroup({
+    this.title,
+    this.description,
+    this.icon,
+    this.expandData,
+  }) {
+    assert(title != null);
+    assert(icon != null);
+    assert(expandData != null);
+  }
 }
 
-List<RouterData> widgetRouter = [
+class RouterData {
+  final String title;
+  final String description;
+  bool selected;
+  PreviewWidgetFactory preview;
+  IntroduceWidgetFactory introduce;
+  Widget Function() code;
   RouterData(
-      index: 0,
+      {this.title,
+      this.description,
+      this.selected = false,
+      this.preview,
+      this.introduce,
+      this.code}) {
+    assert(title != null);
+    assert(preview != null);
+    assert(introduce != null);
+  }
+}
+
+List<RouterGroup> widgetRouter = [
+  RouterGroup(title: "Text", icon: Icons.text_fields, expandData: <RouterData>[
+    RouterData(
       title: "Text",
-      icon: Icons.text_fields,
+      preview: () => Text("Preview"),
+      introduce: () => Text("Introduct"),
+    )
+  ]),
+  RouterGroup(
+      title: "Animation",
+      icon: Icons.rotate_right,
       expandData: <RouterData>[
         RouterData(
-            index: 1,
-            title: "Text",
-            icon: Icons.text_fields,
-            routerName: '/widget/text')
-      ]),
+          title: "Simple Animation",
+          preview: () => SimpleAnimationPreview(),
+          introduce: () => SimpleAnimationIntroduce(),
+        ),
+        RouterData(
+          title: "Route Animation",
+          preview: () => RouteAnimationPreview(),
+          introduce: () => RouteAnimationIntroduce(),
+        ),
+        RouterData(
+          title: "Hero Animation",
+          preview: () => HeroAnimationPreview(),
+          introduce: () => HeroAnimationIntroduce(),
+        )
+      ])
 ];

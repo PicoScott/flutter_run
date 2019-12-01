@@ -7,7 +7,6 @@ class WidgetPage extends StatefulWidget {
 }
 
 class WidgetStates extends State<WidgetPage> {
-
   final displayNameMap = const {0: "Text"};
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,6 @@ class WidgetStates extends State<WidgetPage> {
 class WidgetItem extends StatefulWidget {
   RouterData data;
   WidgetItem(RouterData data) : super() {
-    print(data);
     this.data = data;
   }
 
@@ -70,7 +68,8 @@ class WidgetItemState extends State<WidgetItem> {
               }),
           title: Text(data.title),
           trailing: Icon(Icons.arrow_right),
-          onTap: () => Navigator.of(context).pushNamed(data.routerName,arguments: data),
+          onTap: () => Navigator.of(context)
+              .pushNamed("/widget_common", arguments: data),
         ));
   }
 }

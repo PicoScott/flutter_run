@@ -1,6 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_run/app/widget/router_data.dart';
-import 'package:flutter_run/widget/detail_title.dart';
 
 class WigetDisplayPage extends StatefulWidget {
   final RouterData _data;
@@ -25,10 +25,9 @@ class WigetDisplayPageState extends State<WigetDisplayPage>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
-          title: Text("Text"),
+          title: Text(_data.title),
           bottom: TabBar(
             controller: _tabController,
             tabs: [
@@ -47,8 +46,10 @@ class WigetDisplayPageState extends State<WigetDisplayPage>
             ],
           ),
         ),
-        body: Row(
-          children: <Widget>[TitleText("描述")],
+        body: TabBarView(
+          controller: _tabController,
+          dragStartBehavior: DragStartBehavior.start,
+          children: <Widget>[_data.preview(), _data.introduce(), Text("Code")],
         ));
   }
 }
