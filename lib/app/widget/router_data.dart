@@ -29,17 +29,18 @@ class RouterData {
   bool selected;
   PreviewWidgetFactory preview;
   IntroduceWidgetFactory introduce;
-  Widget Function() code;
+  String code;
   RouterData(
-      {this.title,
+      {@required this.title,
       this.description,
       this.selected = false,
-      this.preview,
-      this.introduce,
-      this.code}) {
+      @required this.preview,
+      @required this.introduce,
+      @required this.code}) {
     assert(title != null);
     assert(preview != null);
     assert(introduce != null);
+    assert(code != null);
   }
 }
 
@@ -49,6 +50,7 @@ List<RouterGroup> widgetRouter = [
       title: "Text",
       preview: () => Text("Preview"),
       introduce: () => Text("Introduct"),
+      code: "",
     )
   ]),
   RouterGroup(
@@ -59,16 +61,19 @@ List<RouterGroup> widgetRouter = [
           title: "Simple Animation",
           preview: () => SimpleAnimationPreview(),
           introduce: () => SimpleAnimationIntroduce(),
+          code: "lib/app/widget/animation/simple_animation_run.dart",
         ),
         RouterData(
           title: "Route Animation",
           preview: () => RouteAnimationPreview(),
           introduce: () => RouteAnimationIntroduce(),
+          code: "lib/app/widget/animation/route_animation_run.dart",
         ),
         RouterData(
           title: "Hero Animation",
           preview: () => HeroAnimationPreview(),
           introduce: () => HeroAnimationIntroduce(),
+          code: "lib/app/widget/animation/hero_animation_run.dart",
         )
       ])
 ];

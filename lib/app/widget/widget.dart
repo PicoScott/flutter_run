@@ -58,8 +58,8 @@ class WidgetItemState extends State<WidgetItem> {
         child: ListTile(
           leading: GestureDetector(
               child: data.selected
-                  ? Icon(Icons.favorite_border)
-                  : Icon(Icons.favorite, color: Colors.redAccent),
+                  ? Icon(Icons.favorite, color: Colors.redAccent)
+                  : Icon(Icons.favorite_border),
               onTap: () {
                 print(data.selected);
                 data.selected = !data.selected;
