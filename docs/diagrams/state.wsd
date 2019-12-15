@@ -1,0 +1,31 @@
+@startuml
+State -> State: setState
+State -> Element: markNeedsBuild
+Element -> BuildOwner: scheduleBuildFor
+BuildOwner -> WidgetsBinding: _handleBuildScheduled
+WidgetsBinding -> SchedulerBinding: scheduleFrame
+
+SchedulerBinding -> SchedulerBinding: _handleDrawFrame
+SchedulerBinding -> SchedulerBinding: handleDrawFrame
+SchedulerBinding -> RendererBinding: drawFrame
+
+' Build 过程
+RendererBinding -> WidgetsBinding: drawFrame
+WidgetsBinding -> BuildOwner: buildScope
+BuildOwner -> Element: rebuild
+Element -> ComponentElement: performRebuild
+ComponentElement -> StatefulElement: build
+StatefulElement -> State: build
+
+' Layout过程
+RendererBinding -> PipelineOwner: flushLayout
+PipelineOwner -> RenderObject:_layoutWithoutResize
+RenderObject ->RenderObject: performLayout
+
+' Paint 过程
+RendererBinding -> PipelineOwner: flushPaint
+PipelineOwner -> PaintingContext: repaintCompositedChild
+PaintingContext -> PaintingContext: _repaintCompositedChild
+PaintingContext -> RenderObject:_paintWithContext
+RenderObject -> RenderObject:paint
+@enduml

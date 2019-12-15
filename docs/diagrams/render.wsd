@@ -1,0 +1,25 @@
+@startuml
+SchedulerBinding -> SchedulerBinding: _handleDrawFrame
+SchedulerBinding -> SchedulerBinding: handleDrawFrame
+SchedulerBinding -> RendererBinding: drawFrame
+RendererBinding -> WidgetsBinding: drawFrame
+
+WidgetsBinding -> BuildOwner: buildScope
+BuildOwner -> Element: rebuild
+Element -> Element: performRebuild
+
+' Layout过程
+RendererBinding -> PipelineOwner: flushLayout
+PipelineOwner -> RenderObject:_layoutWithoutResize
+RenderObject ->RenderObject: performLayout
+RenderObject -> RenderObject: child.layout
+RenderObject -> RenderObject: performResize
+
+' Paint 过程
+RendererBinding -> PipelineOwner: flushPaint
+PipelineOwner -> PaintingContext: repaintCompositedChild
+PaintingContext -> PaintingContext: _repaintCompositedChild
+PaintingContext -> RenderObject:_paintWithContext
+RenderObject -> RenderObject:paint
+
+@enduml

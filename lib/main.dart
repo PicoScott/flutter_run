@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_run/app/widget/router_data.dart';
 import 'package:flutter_run/app/widget/widget.dart';
 
 import 'app/team/team.dart';
 import 'app/widget/widget_common.dart';
+import 'app/widget/widget_router_data.dart';
 
 void main() => runApp(MaterialApp(
       initialRoute: '/',
@@ -15,14 +15,12 @@ void main() => runApp(MaterialApp(
             return MaterialPageRoute(
                 builder: (context) =>
                     WigetDisplayPage(settings.arguments as RouterData));
+          case '/flutter_team':
+            return MaterialPageRoute(builder: (context) => TeamPage());
           default:
-            MaterialPageRoute();
+            return MaterialPageRoute();
         }
       },
-      // routes: {
-      //   '/': (context) => MainPage(),
-      //   '/widget/text': (context) => WigetDisplayPage()
-      // },
     ));
 
 class MainPage extends StatefulWidget {
@@ -48,12 +46,41 @@ class MainPageState extends State<MainPage>
         ),
         body: new WidgetPage(),
         drawer: Drawer(
-          child: Row(
+          child: Column(
             children: <Widget>[
-              GestureDetector(
-                  child: Text("Flutter Team"),
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TeamPage())))
+              UserAccountsDrawerHeader(
+                currentAccountPicture: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/ic_avatar.jpeg"))),
+                ),
+                accountEmail: Text("cnscott.lee@gmail.com"),
+                accountName: Text("Scott Lee"),
+              ),
+              ListTile(
+                leading: Icon(Icons.touch_app),
+                title: Text("Widget"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/widget');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.cake),
+                title: Text("Flutter Team"),
+                onTap: () {
+                  Navigator.pushNamed(context, "/flutter_team");
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text("Favorite"),
+              ),
+              ListTile(
+                leading: Icon(Icons.feedback),
+                title: Text("About"),
+              )
             ],
           ),
         ));

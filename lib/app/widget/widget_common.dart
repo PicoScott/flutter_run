@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_run/app/widget/router_data.dart';
+import 'package:flutter_run/app/widget/widget_router_data.dart';
 import 'package:flutter_run/utils/syntax_highlight.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,6 +25,7 @@ class WigetDisplayPageState extends State<WigetDisplayPage>
   @override
   void initState() {
     super.initState();
+    print(_data.introduce);
     _tabController = TabController(length: 3, vsync: this);
   }
 
@@ -55,8 +56,8 @@ class WigetDisplayPageState extends State<WigetDisplayPage>
           controller: _tabController,
           dragStartBehavior: DragStartBehavior.start,
           children: <Widget>[
-            _data.preview(),
-            _data.introduce(),
+            _data.preview,
+            _data.introduce,
             _CodeView(codePath: _data.code)
           ],
         ));
