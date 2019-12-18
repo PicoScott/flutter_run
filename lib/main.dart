@@ -4,6 +4,7 @@ import 'package:flutter_run/app/widget/widget.dart';
 import 'app/team/team.dart';
 import 'app/widget/widget_common.dart';
 import 'app/widget/widget_router_data.dart';
+import 'package:flutter_run/utils/frame_monitor.dart';
 
 void main() => runApp(MaterialApp(
       initialRoute: '/',
@@ -33,6 +34,12 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    start_frame_monitor();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -21,7 +21,6 @@ class WigetDisplayPageState extends State<WigetDisplayPage>
   TabController _tabController;
   RouterData _data;
   WigetDisplayPageState(this._data);
-
   @override
   void initState() {
     super.initState();

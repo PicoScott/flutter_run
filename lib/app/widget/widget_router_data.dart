@@ -42,6 +42,9 @@ class RouterData {
     assert(title != null);
     assert(preview != null);
     assert(code != null);
+    if(introduce == null){
+      introduce = Text("data");
+    }
   }
 }
 
